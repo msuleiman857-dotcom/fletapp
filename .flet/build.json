@@ -1,0 +1,10 @@
+{
+  "app_name": "MyFletApp",
+  "target": "main.py",
+  "platforms": [
+    "android"
+  ],
+  "description": "Flet app packaged for Android",
+  "version": "1.0.0",
+  "entrypoint": "main.py"
+}
