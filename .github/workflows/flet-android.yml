@@ -1,0 +1,12 @@
+name: Build Flet Android App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: flet-dev/action-publish-android@v1
