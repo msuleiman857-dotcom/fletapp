@@ -1,0 +1,42 @@
+name: Build Flet Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Flet and dependencies
+        run: |
+          pip install flet flet-core buildozer cython
+          sudo apt update
+          sudo apt install -y zip unzip libncurses5 libstdc++6 libffi-dev libssl-dev \
+            libsqlite3-dev zlib1g-dev libjpeg-dev libfreetype6-dev libpng-dev \
+            libavcodec-dev libavformat-dev libswscale-dev libpcap-dev
+
+      - name: Initialize Buildozer
+        run: |
+          flet pack android
+          ls
+          cd android
+          buildozer init
+
+      - name: Build APK
+        run: |
+          cd android
+          buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: flet-app
+          path: android/bin/*.apk
