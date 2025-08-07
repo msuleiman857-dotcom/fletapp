@@ -19,7 +19,7 @@ jobs:
         run: |
           pip install flet flet-core buildozer cython
           sudo apt update
-          sudo apt install -y zip unzip libncurses5 libstdc++6 libffi-dev libssl-dev \
+          sudo apt install -y zip unzip libncurses6 libstdc++6 libffi-dev libssl-dev \
             libsqlite3-dev zlib1g-dev libjpeg-dev libfreetype6-dev libpng-dev \
             libavcodec-dev libavformat-dev libswscale-dev libpcap-dev
 
@@ -36,7 +36,7 @@ jobs:
           buildozer android debug
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.3.1
         with:
           name: flet-app
           path: android/bin/*.apk
